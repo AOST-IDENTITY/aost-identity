@@ -183,12 +183,9 @@ input[type=email]:focus{border-color:#333;}
   <p class="wl-desc">
     Lista privada. Solo quienes estén dentro sabrán la fecha y hora exactas del primer drop, y se llevarán <em>10% de descuento exclusivo</em>. Piezas limitadas, marcadas y numeradas. When they're gone, they're gone.
   </p>
- <form action="https://formspree.io/f/xvznvbkv" method="POST">
-
+<form id="formAOST">
   <input type="email" name="email" placeholder="tu.correo@ejemplo.com" required>
-  <input type="hidden" name="_next" value="https://aost-identity.netlify.app/gracias.html">
   <button type="submit" class="btn-join">UNIRME →</button>
-
 </form>
   </div>
   <div class="disclaimer">AL REGISTRARTE ACEPTAS RECIBIR CORREOS · NO SPAM</div>
@@ -251,6 +248,29 @@ function toggleMusic(){
     }
   }
 }
+</script>
+  <script>
+const form = document.getElementById("formAOST");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  fetch("https://formspree.io/f/xvznvbkv", {
+    method: "POST",
+    body: data,
+    headers: {
+      'Accept': 'application/json'
+    }
+  }).then(response => {
+    if(response.ok){
+      window.location.href = "gracias.html";
+    } else {
+      alert("Error al enviar. Intenta de nuevo.");
+    }
+  });
+});
 </script>
 </body>
 </html>
