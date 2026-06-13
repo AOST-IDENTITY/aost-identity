@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="AOST IDENTITY — First Drop. Lista privada de acceso anticipado. Piezas limitadas y numeradas."/>
+<title>AOST IDENTITY — First Drop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#000;color:#fff;font-family:'Space Mono',monospace;overflow-x:hidden;}
+
+/* TICKER */
+.ticker-wrap{border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;overflow:hidden;padding:9px 0;white-space:nowrap;}
+.ticker-track{display:inline-flex;animation:ticker-scroll 30s linear infinite;will-change:transform;}
+.ticker-track span{font-family:'Space Mono',monospace;font-size:10px;color:#fff;letter-spacing:0.2em;padding-right:60px;}
+@keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* NAV */
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 24px;border-bottom:1px solid #111;background:#000;}
+.nav-left{display:flex;align-items:center;}
+.nav-center{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;letter-spacing:0.22em;color:#fff;text-align:center;}
+.nav-right{display:flex;justify-content:flex-end;}
+.cart{font-family:'Space Mono',monospace;font-size:10px;color:#333;border:1px solid #1a1a1a;padding:6px 14px;letter-spacing:0.12em;}
+
+/* MUSIC BUTTON */
+.music-btn{background:transparent;border:1px solid #1a1a1a;color:#555;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:border-color 0.2s,color 0.2s;}
+.music-btn:hover{border-color:#444;color:#fff;}
+.music-btn.playing{border-color:#e63030;color:#e63030;}
+.bars-icon{display:flex;align-items:flex-end;gap:2px;height:14px;}
+.bar{width:3px;background:currentColor;border-radius:1px;}
+.bar1{height:6px;}.bar2{height:10px;}.bar3{height:8px;}
+.music-btn.playing .bar1{animation:bar-dance 0.8s ease infinite alternate;}
+.music-btn.playing .bar2{animation:bar-dance 0.8s ease 0.15s infinite alternate;}
+.music-btn.playing .bar3{animation:bar-dance 0.8s ease 0.3s infinite alternate;}
+@keyframes bar-dance{from{height:4px;}to{height:14px;}}
+.pause-icon{display:none;align-items:center;gap:3px;}
+.pause-bar{width:3px;height:12px;background:currentColor;border-radius:1px;}
+.music-btn.playing .bars-icon{display:none;}
+.music-btn.playing .pause-icon{display:flex;}
+
+/* HERO */
+.hero{padding:52px 24px 12px;text-align:left;}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:9px;color:#2a2a2a;letter-spacing:0.35em;margin-bottom:28px;text-transform:uppercase;}
+.name-aost{font-family:'Oswald',sans-serif;font-size:clamp(86px,22vw,110px);font-weight:700;line-height:1;letter-spacing:-0.02em;color:#fff;text-transform:uppercase;display:block;text-shadow:2px 2px 0px #1a1a1a,4px 4px 0px #111;}
+.name-identity{font-family:'Oswald',sans-serif;font-size:clamp(28px,7vw,38px);font-weight:700;letter-spacing:0.38em;color:#555;text-transform:uppercase;display:block;margin-top:6px;}
+.hero-tagline{font-family:'Space Mono',monospace;font-size:9px;color:#e63030;letter-spacing:0.25em;margin-top:18px;text-transform:uppercase;}
+.hero-phrase{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:#383838;letter-spacing:0.04em;margin-top:10px;white-space:nowrap;}
+
+/* DROP BAR */
+.drop-bar{display:flex;justify-content:space-between;align-items:center;padding:13px 24px;border-top:1px solid #111;border-bottom:1px solid #111;margin-top:28px;flex-wrap:wrap;gap:6px;}
+.drop-bar span{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#444;}
+.drop-bar .hi{color:#e63030;font-weight:700;}
+.drop-bar .ltd{color:#e63030;font-weight:700;}
+
+/* LOGO BOX */
+.logo-box{position:relative;overflow:hidden;width:100%;aspect-ratio:1/1;max-height:360px;}
+.logo-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:brightness(1) contrast(1.05);}
+.grid-bg{position:absolute;inset:0;opacity:0.03;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:36px 36px;z-index:1;}
+.corner{position:absolute;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.1em;z-index:3;}
+.ctL{top:12px;left:16px;color:#555;}
+.ctR{top:12px;right:16px;color:#e63030;}
+.cbL{bottom:12px;left:16px;color:#444;}
+.cbR{bottom:12px;right:16px;color:#444;}
+.red-dot{display:inline-block;width:6px;height:6px;background:#e63030;border-radius:50%;margin-right:5px;vertical-align:middle;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* WAITLIST */
+.wl-box{margin:20px 16px;border:1px solid #181818;padding:26px 22px;}
+.wl-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;gap:8px;flex-wrap:wrap;}
+.wl-tag{font-family:'Space Mono',monospace;font-size:10px;color:#444;letter-spacing:0.2em;}
+.wl-tag::before{content:'· ';color:#e63030;}
+.wl-ref{font-family:'Space Mono',monospace;font-size:9px;color:#2a2a2a;letter-spacing:0.12em;}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #2a0a0a;background:#0d0000;padding:5px 12px;margin-bottom:18px;}
+.badge-pct{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#e63030;}
+.badge-lbl{font-family:'Space Mono',monospace;font-size:9px;color:#555;letter-spacing:0.14em;}
+.wl-h1{font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:700;line-height:0.95;color:#fff;letter-spacing:-0.01em;margin-bottom:16px;}
+.wl-desc{font-size:13px;color:#555;line-height:1.65;margin-bottom:22px;font-family:'Space Grotesk',sans-serif;}
+.wl-desc em{color:#e63030;font-style:italic;}
+
+input[type=email]{width:100%;background:#050505;border:1px solid #1c1c1c;color:#fff;font-family:'Space Mono',monospace;font-size:13px;padding:14px 16px;outline:none;margin-bottom:10px;transition:border-color 0.2s;display:block;}
+input[type=email]::placeholder{color:#2a2a2a;}
+input[type=email]:focus{border-color:#333;}
+
+.btn-join{width:100%;background:#e63030;color:#fff;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.18em;padding:16px;border:1px solid transparent;cursor:pointer;display:block;animation:btnblink 2s infinite;}
+.btn-join:hover{animation:none;background:#fff;color:#000;}
+@keyframes btnblink{
+  0%,45%,55%,100%{background:#e63030;box-shadow:0 0 14px rgba(230,48,48,0.45);color:#fff;border-color:transparent;}
+  50%{background:#000;box-shadow:none;color:#e63030;border-color:#e63030;}
+}
+
+.disclaimer{margin-top:14px;font-family:'Space Mono',monospace;font-size:8px;color:#2a2a2a;letter-spacing:0.1em;line-height:1.9;}
+.counter{margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;color:#333;letter-spacing:0.1em;}
+.counter b{color:#e63030;}
+
+.success{display:none;background:#060606;border:1px solid #1a0000;padding:22px;text-align:center;margin-top:10px;}
+.success p{font-family:'Space Mono',monospace;font-size:11px;color:#555;letter-spacing:0.12em;line-height:1.9;}
+.success strong{color:#e63030;}
+
+/* FOOTER */
+.footer-area{padding:32px 24px 24px;text-align:center;}
+.footer-phrase{font-family:'Space Mono',monospace;font-size:13px;color:#1e1e1e;letter-spacing:0.08em;line-height:1.7;margin-bottom:24px;}
+.socials{display:flex;gap:12px;}
+.soc-btn{flex:1;border:1px solid #1a1a1a;background:transparent;color:#444;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;padding:14px 6px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:color 0.15s,border-color 0.15s,background 0.15s;text-decoration:none;}
+.soc-btn:hover,.soc-btn:active{color:#fff;border-color:#fff;background:#111;}
+
+.site-footer{border-top:1px solid #0e0e0e;padding:14px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.site-footer span{font-family:'Space Mono',monospace;font-size:8px;color:#222;letter-spacing:0.1em;}
+</style>
+</head>
+<body>
+
+<iframe id="yt-audio" width="0" height="0" style="position:absolute;opacity:0;pointer-events:none;" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span>FIRST DROP LOADING · AOST IDENTITY · LIMITED PIECES · NUMBERED PIECES · ?/07/26 · STREETWEAR · URBAN · UNISEX · DEFINE WHO YOU ARE ·&nbsp;</span>
+    <span>FIRST DROP LOADING · AOST IDENTITY · LIMITED PIECES · NUMBERED PIECES · ?/07/26 · STREETWEAR · URBAN · UNISEX · DEFINE WHO YOU ARE ·&nbsp;</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+      <div class="bars-icon">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+      </div>
+      <div class="pause-icon">
+        <div class="pause-bar"></div>
+        <div class="pause-bar"></div>
+      </div>
+    </button>
+  </div>
+  <div class="nav-center">AOST</div>
+  <div class="nav-right"><span class="cart">CART [0]</span></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">STREETWEAR · URBAN · UNISEX · REF AOST-001</div>
+  <span class="name-aost">AOST</span>
+  <span class="name-identity">IDENTITY</span>
+  <div class="hero-tagline">DEFINE WHO YOU ARE.</div>
+  <p class="hero-phrase">It's not the end, it's the beginning of your best version.</p>
+</div>
+
+<!-- DROP BAR -->
+<div class="drop-bar">
+  <span>FIRST DROP</span>
+  <span class="hi">?/07/26</span>
+  <span>N° 001</span>
+  <span class="ltd">LIMITED</span>
+</div>
+
+<!-- LOGO -->
+<div class="logo-box">
+  <div class="grid-bg"></div>
+  <span class="corner ctL"><span class="red-dot"></span>FIRST DROP</span>
+  <span class="corner ctR">?/07/26</span>
+  <span class="corner cbL">N° 001</span>
+  <span class="corner cbR">LIMITED</span>
+  <img class="logo-img" src="AOST.jpeg" alt="AOST IDENTITY Logo"/>
+</div>
+
+<!-- WAITLIST -->
+<div class="wl-box">
+  <div class="wl-top">
+    <span class="wl-tag">LISTA PRIVADA</span>
+    <span class="wl-ref">// AOST-LIST · 001 &nbsp; PIEZAS NUMERADAS</span>
+  </div>
+  <div class="badge">
+    <span class="badge-pct">-10%</span>
+    <span class="badge-lbl">EXCLUSIVO · PRIMER DROP</span>
+  </div>
+  <h2 class="wl-h1">ENTRA A<br>LA LISTA.</h2>
+  <p class="wl-desc">
+    Lista privada. Solo quienes estén dentro sabrán la fecha y hora exactas del primer drop, y se llevarán <em>10% de descuento exclusivo</em>. Piezas limitadas, marcadas y numeradas. When they're gone, they're gone.
+  </p>
+  <input type="email" id="emailIn" placeholder="tu.correo@ejemplo.com"/>
+  <button class="btn-join" id="joinBtn" onclick="joinList()">UNIRME →</button>
+  <div class="success" id="okMsg">
+    <p><strong>ESTÁS DENTRO.</strong><br>Te avisamos antes que nadie.<br>Guarda este correo · AOST-LIST 001</p>
+  </div>
+  <div class="disclaimer">AL REGISTRARTE ACEPTAS RECIBIR CORREOS · NO SPAM</div>
+  <div class="counter">+<b id="cnt">1277</b> EN LA LISTA</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-area">
+  <p class="footer-phrase">¿ IS THE IDENTITY<br>HERE ? </p>
+  <div class="socials">
+    <a class="soc-btn" href="https://www.instagram.com/aost.identity" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+      INSTAGRAM
+    </a>
+    <a class="soc-btn" href="https://www.tiktok.com/@aost.identity" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+      TIKTOK
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <span>© 2026 AOST IDENTITY</span>
+  <span>HECHO EN PERÚ</span>
+  <span>V0.1 · PRE-LAUNCH</span>
+</footer>
+
+<script>
+let playing=false,iframeLoaded=false;
+function toggleMusic(){
+  const btn=document.getElementById('musicBtn');
+  const iframe=document.getElementById('yt-audio');
+  if(!playing){
+    if(!iframeLoaded){
+      iframe.src="https://www.youtube.com/embed/aR-KAldshAE?autoplay=1&loop=1&playlist=aR-KAldshAE&controls=0&mute=0&enablejsapi=1";
+      iframeLoaded=true;
+    } else {
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}','*');
+    }
+    btn.classList.add('playing');
+    playing=true;
+  } else {
+    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}','*');
+    btn.classList.remove('playing');
+    playing=false;
+  }
+}
+let n=1277;
+function joinList(){
+  const inp=document.getElementById('emailIn');
+  const ok=document.getElementById('okMsg');
+  const cnt=document.getElementById('cnt');
+  const btn=document.getElementById('joinBtn');
+  if(!inp.value||!inp.value.includes('@')){
+    inp.style.borderColor='#e63030';
+    setTimeout(()=>inp.style.borderColor='#1c1c1c',1500);
+    return;
+  }
+  btn.style.animation='none';
+  btn.style.background='#e63030';
+  btn.style.color='#fff';
+  setTimeout(()=>{
+    inp.style.display='none';
+    btn.style.display='none';
+    ok.style.display='block';
+    n++;cnt.textContent=n;
+  },300);
+}
+</script>
+</body>
+</html>
