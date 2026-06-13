@@ -110,45 +110,10 @@ input[type=email]:focus{border-color:#333;}
 </style>
 </head>
 <body>
+
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-<script>
-const music = document.getElementById('bgMusic');
-const btn = document.getElementById('musicBtn');
-
-let started = false;
-
-// intento automático
-window.addEventListener('load', () => {
-  music.volume = 0.6;
-
-  music.play()
-    .then(() => {
-      btn.classList.add('playing');
-      started = true;
-    })
-    .catch(() => {
-      console.log("Autoplay bloqueado");
-    });
-});
-
-function toggleMusic(){
-  if(!started){
-    music.play();
-    btn.classList.add('playing');
-    started = true;
-  } else {
-    if(music.paused){
-      music.play();
-      btn.classList.add('playing');
-    } else {
-      music.pause();
-      btn.classList.remove('playing');
-    }
-  }
-}
-</script>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
@@ -249,45 +214,39 @@ function toggleMusic(){
 </footer>
 
 <script>
-let playing=false,iframeLoaded=false;
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('musicBtn');
+
+let started = false;
+
+// intento automático
+window.addEventListener('load', () => {
+  music.volume = 0.6;
+
+  music.play()
+    .then(() => {
+      btn.classList.add('playing');
+      started = true;
+    })
+    .catch(() => {
+      console.log("Autoplay bloqueado");
+    });
+});
+
 function toggleMusic(){
-  const btn=document.getElementById('musicBtn');
-  const iframe=document.getElementById('yt-audio');
-  if(!playing){
-    if(!iframeLoaded){
-      iframe.src="https://www.youtube.com/embed/aR-KAldshAE?autoplay=1&loop=1&playlist=aR-KAldshAE&controls=0&mute=0&enablejsapi=1";
-      iframeLoaded=true;
-    } else {
-      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}','*');
-    }
+  if(!started){
+    music.play();
     btn.classList.add('playing');
-    playing=true;
+    started = true;
   } else {
-    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}','*');
-    btn.classList.remove('playing');
-    playing=false;
+    if(music.paused){
+      music.play();
+      btn.classList.add('playing');
+    } else {
+      music.pause();
+      btn.classList.remove('playing');
+    }
   }
-}
-let n=1277;
-function joinList(){
-  const inp=document.getElementById('emailIn');
-  const ok=document.getElementById('okMsg');
-  const cnt=document.getElementById('cnt');
-  const btn=document.getElementById('joinBtn');
-  if(!inp.value||!inp.value.includes('@')){
-    inp.style.borderColor='#e63030';
-    setTimeout(()=>inp.style.borderColor='#1c1c1c',1500);
-    return;
-  }
-  btn.style.animation='none';
-  btn.style.background='#e63030';
-  btn.style.color='#fff';
-  setTimeout(()=>{
-    inp.style.display='none';
-    btn.style.display='none';
-    ok.style.display='block';
-    n++;cnt.textContent=n;
-  },300);
 }
 </script>
 </body>
