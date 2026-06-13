@@ -238,7 +238,8 @@ function toggleMusic(){
     music.play();
     btn.classList.add('playing');
     started = true;
-    
+
+    // 👇 GUARDAMOS ESTADO
     localStorage.setItem("musicPlaying", "true");
 
   } else {
