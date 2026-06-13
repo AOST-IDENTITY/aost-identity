@@ -119,7 +119,9 @@ body{
 </head>
 
 <body>
-
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 <div class="container">
 
   <h1 class="title glitch" data-text="ACCESS GRANTED">
@@ -144,6 +146,17 @@ body{
   </a>
 
 </div>
+<script>
+const music = document.getElementById("bgMusic");
 
+window.addEventListener("load", () => {
+  const shouldPlay = localStorage.getItem("musicPlaying");
+
+  if(shouldPlay === "true"){
+    music.volume = 0.6;
+    music.play().catch(() => {});
+  }
+});
+</script>
 </body>
 </html>
