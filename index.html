@@ -238,13 +238,18 @@ function toggleMusic(){
     music.play();
     btn.classList.add('playing');
     started = true;
+    
+    localStorage.setItem("musicPlaying", "true");
+
   } else {
     if(music.paused){
       music.play();
       btn.classList.add('playing');
+      localStorage.setItem("musicPlaying", "true");
     } else {
       music.pause();
       btn.classList.remove('playing');
+      localStorage.setItem("musicPlaying", "false");
     }
   }
 }
